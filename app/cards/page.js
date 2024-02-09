@@ -1,12 +1,14 @@
 "use client";
 import "highlight.js/styles/github.css";
-import hljs from 'highlight.js';
+import hljs from "highlight.js";
 import { marked } from "marked";
 
-
 import React, { useEffect, useState } from "react";
+import { clsx } from "clsx";
 
 const Cards = () => {
+  const [cardcn, setCardcn] = useState("");
+  const [titlecn, setTitlecn] = useState("");
   const [title, setTitle] = useState("Card Title");
   const [btn, setBtn] = useState("Button Text");
   const [description, setDescription] = useState(
@@ -20,23 +22,27 @@ const Cards = () => {
   }, []);
   const markdown = `
   \`\`\`js
-  <div className="card">
+  <div className="">
     <img src="${imgInput}" className="" alt="...">
-    <div className="">
-        <h5 className="">${title}</h5>
-        <p class="card-text">${description}</p>
-        <Link href={"/"}>${btn}</Link>
+    <div className="p-2 ${cardcn}">
+        <h5 className="${titlecn}">${title}</h5>
+        <p className="">${description}</p>
+        <Link href={"/"} className="border py-1 px-2 rounded-md mt-4 text-white bg-blue-700 text-[12px]">${btn}</Link>
     </div>
 </div>
   \`\`\`
 `;
+
+const propertiesTopic = 'text-center text-[13px] mt-5 border bg-slate-900'
+const propertiesSubTopic = 'text-[10px]'
+const propertiesInput = 'text-[10px] w-full text-black px-2 py-1'
   return (
     <main className="flex ml-[10rem] h-full">
       <article className="flex flex-col justify-between border-8 border-yellow-400 h-full overflow-y-auto">
-        {/* Cards */}
+        
         <div className="border-8 border-red-400">
           {/* Cards Header */}
-          <h1 className="text-center text-2xl font-bold">Cards</h1>
+          <h1 className="text-center text-2xl font-bold">Image Cards</h1>
           <p className="text-center">
             Flexible and extensible content container with multiple variants and
             options.
@@ -46,24 +52,27 @@ const Cards = () => {
             {/* Show Card */}
             <div className="md:w-1/2 w-full lg:w-1/4">
               <img src={imgInput} className="border rounded-t-lg" alt="..." />
-              <div class="card-body border rounded-b-lg ">
-                <h5 class="card-title w-fit hover:border-2 hover:border-red-500">
+              <div className={clsx(`${cardcn} border rounded-b-lg p-2`)}>
+                <h5 className={`${titlecn} text-bold text-[16px]`}>
                   {title}
                 </h5>
                 <p
-                  className="card-text"
+                  className="text-[13px]"
                   dangerouslySetInnerHTML={{
                     __html: description.replace(/\n/g, "<br>"),
                   }}
                 ></p>
-                <a href="#" className="btn btn-primary">
+                <a href="#" className="border py-1 px-2 rounded-md mt-4 text-white bg-blue-700 text-[12px]">
                   {btn}
                 </a>
               </div>
             </div>
             {/* Show Code */}
             <div className="flex w-full flex-col">
-            <div className="bg-black text-white p-2 overflow-auto" dangerouslySetInnerHTML={{ __html: marked(markdown) }}></div>
+              <div
+                className="bg-black text-white p-2 overflow-auto"
+                dangerouslySetInnerHTML={{ __html: marked(markdown) }}
+              ></div>
             </div>
           </section>
         </div>
@@ -73,40 +82,39 @@ const Cards = () => {
       <aside className="w-[30rem] h-full bg-black text-white border-green-600 border-8">
         <h2 className="text-center text-sm my-2">Properties</h2>
         <hr />
-        <h3>Card top</h3>
-        <div className="gap-2 px-2">
-          <label className="text-sm" htmlFor="image">
+        <h3 className={`${propertiesTopic}`}>Card top</h3>
+        <section className="gap-2 px-2">
+          <label className={`${propertiesSubTopic}`} htmlFor="image">
             Image URL
           </label>
           <input
-            className="text-black w-full px-2"
+            className={`${propertiesInput}`}
             type="text"
             id="image"
             value={imgInput}
             onChange={(e) => setImgInput(e.target.value)}
           />
-        </div>
+        </section>
 
-        <h3>Card Body</h3>
-        <div className="gap-2 px-2">
-          <label className="text-sm" htmlFor="title">
+        <h3 className={`${propertiesTopic}`}>Card Body</h3>
+        <section className="gap-2 px-2">
+          <label className={`${propertiesSubTopic}`} htmlFor="title">
             Card Title
           </label>
 
           <input
-            className="text-black w-full px-2"
+            className={`${propertiesInput}`}
             type="text"
             id="title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-        </div>
-        <div className="gap-2 px-2">
-          <label className="text-sm" htmlFor="description">
+        
+          <label className={`${propertiesSubTopic}`} htmlFor="description">
             Card Description
           </label>
           <textarea
-            className="text-black w-full px-2 h-auto"
+            className="text-black px-2 py-1 h-20 text-[10px] w-full"
             type="textbox"
             id="description"
             value={description}
@@ -133,20 +141,49 @@ const Cards = () => {
               }
             }}
           />
-        </div>
-        <h3>Card Button</h3>
-        <div className="gap-2 px-2">
-          <label className="text-sm" htmlFor="btn">
-            Button Text
-          </label>
-          <input
-            className="text-black w-full px-2"
-            type="text"
-            id="btn"
-            value={btn}
-            onChange={(e) => setBtn(e.target.value)}
-          />
-        </div>
+        </section>
+        <h3 className={`${propertiesTopic}`}>Card Button</h3>
+        <section>
+          <div className="gap-2 px-2">
+            <label className={`${propertiesSubTopic}`} htmlFor="btncn">
+              Button Text
+            </label>
+            <input
+              className={`${propertiesInput}`}
+              type="text"
+              id="btncn"
+              value={btn}
+              onChange={(e) => setBtn(e.target.value)}
+            />
+          </div>
+        </section>
+        <h3 className={`${propertiesTopic}`}>Custom Classname</h3>
+        <section>
+          <div className="gap-2 px-2">
+            <label className={`${propertiesSubTopic}`} htmlFor="titlecn">
+              Card Title
+            </label>
+
+            <input
+              className={`${propertiesInput}`}
+              type="text"
+              id="titlecn"
+              value={titlecn}
+              onChange={(e) => setTitlecn(e.target.value)}
+            />
+            <label className={`${propertiesSubTopic}`} htmlFor="cardcn">
+              Card Body
+            </label>
+
+            <input
+              className={`${propertiesInput}`}
+              type="text"
+              id="cardcn"
+              value={cardcn}
+              onChange={(e) => setCardcn(e.target.value)}
+            />
+          </div>
+        </section>
       </aside>
     </main>
   );
