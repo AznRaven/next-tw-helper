@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       
       <body className={inter.className}>
         <Nav />
-        <div className="h-full">
+        <div className="h-full border-8">
           <Sidebar />
           {children}
         </div>

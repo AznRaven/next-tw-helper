@@ -54,7 +54,7 @@ const Modal = ({ isOpen, children, name, setName, closeModal, type }) => {
           />
         )}
         {type === 'textarea' && (
-          <textarea onChange={(e)=>setInput(e.target.value)} id="story" name="story" rows="5" cols="33">
+          <textarea className="border p-2 mt-2" onChange={(e)=>setInput(e.target.value)} id="story" name="story" rows="5" cols="33">
             {name}
           </textarea>
         )}

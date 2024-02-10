@@ -107,12 +107,12 @@ const Accordion = () => {
   const propertiesInput = "text-[10px] w-full text-black px-2 py-1";
 
   return (
-    <main className="flex ml-[10rem] h-full border-8 border-red-600">
-      <article className="flex flex-col justify-between rounded-lg w-4/5 h-full overflow-y-auto min-w-80 border-8 border-red-400">
-        <section className="bg-gradient-to-r from-indigo-500 to-blue-500 grid place-content-center h-full rounded-lg">
-          <div className="wrapper w-[25rem]">
+    <main className="flex h-full border-8 border-red-600">
+      <article className="flex flex-col justify-between rounded-lg w-4/5 h-1/4 overflow-y-auto min-w-80 border-8 border-red-400">
+        <section className="bg-gradient-to-r from-indigo-500 to-blue-500 place-content-center h-1/2 rounded-lg flex justify-center py-5 space-y-5">
+          <div className="wrapper w-1/3">
             {accordionItems.map((item, index) => (
-              <div className="p-4 bg-gray-200 rounded-lg my-1">
+              <div className="px-4 py-1 bg-gray-200 rounded-lg my-1">
                 {/* <Accordions key={index} title={item.title} content={item.content} /> */}
                 <div className="py-2 ">
                   <button
@@ -122,10 +122,10 @@ const Accordion = () => {
                     }
                     key={index}
                   >
-                    <span>{item.title}</span>
+                    <span className="text-sm">{item.title}</span>
                     {/* <span>+</span> */}
                     <svg
-                      className="fill-indigo-500 shrink-0 ml-8"
+                      className="fill-indigo-500 shrink-0 ml-8 scale-50"
                       width="16"
                       height="16"
                       xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,9 @@ const Accordion = () => {
                       "grid overflow-hidden transition-all duration-600 ease-in-out text-slate-600"
                     )}
                   >
-                    <div className="overflow-hidden">{item.content}</div>
+                    <div className="overflow-hidden text-xs">
+                      {item.content}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -172,7 +174,10 @@ const Accordion = () => {
             <button>Main</button>
             <button>Component</button>
           </div>
-          <Code language="js" code={markdown} />
+          {/* Code */}
+          <div className="flex flex-col h-[30rem]">
+            <Code language="js" code={markdown} />
+          </div>
         </section>
       </article>
     </main>

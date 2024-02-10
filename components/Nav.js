@@ -3,7 +3,7 @@ import Link from "next/link";
 const Nav = () => {
     
   return (
-    <nav className="fixed top-0 w-full h-[4rem] bg-slate-950 flex items-center text-sm text-white">
+    <nav className="fixed top-0 left-0 w-full h-[4rem] bg-slate-950 flex items-center text-sm text-white z-20">
       <ul className="flex justify-between px-5 py-3 w-full">
         <h1 className="text-center">AznRaven's TW Helper</h1>
         <li>

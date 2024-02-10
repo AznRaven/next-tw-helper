@@ -4,9 +4,12 @@ import React, { useEffect, useState } from "react";
 import { clsx } from "clsx";
 import Code from "@/components/ui/Code";
 import Modal from "@/components/ui/Modal";
+import OffCanvas from "@/components/OffCanvas";
 
 const Cards = () => {
   const [cardcn, setCardcn] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const [titlecn, setTitlecn] = useState("");
   const [title, setTitle] = useState("Card Title");
   const [titleModal, setTitleModal] = useState(false);
@@ -36,6 +39,9 @@ const Cards = () => {
   const closeTitleModal = () => {
     setTitleModal(false);
   };
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
 
   const propertiesTopic = "text-center text-[13px] mt-5 border bg-slate-900";
   const propertiesSubTopic = "text-[10px]";
@@ -46,8 +52,9 @@ const Cards = () => {
   };
 
   return (
-    <main className="flex ml-[10rem] h-full">
-      <article className="flex flex-col justify-between p-2 h-full overflow-y-auto gap-3">
+    // <main className="h-full grid grid-cols-4">
+    <main className="max-w-3xl mx-auto pt-10 xl:max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16 border border-red-500">
+      <article className="flex flex-col justify-between p-2 h-full overflow-y-auto gap-3 border-8 col-span-3">
         <section className="bg-gradient-to-r from-indigo-500 to-blue-500 flex flex-col items-center gap-10 p-10 rounded-lg h-full">
           {/* Cards Header */}
           <h1 className="text-center text-2xl font-bold">Image Cards</h1>
@@ -65,7 +72,7 @@ const Cards = () => {
               onClick={() => setImgModal(true)}
             />
             {/* Card Body */}
-            <div className={clsx(`${cardcn} border rounded-b-lg p-2 bg-white`)}>
+            <div className={clsx(`${cardcn} border rounded-b-lg p-2 bg-white hover:border-2 hover:border-red-500`)}>
               <div className="flex flex-col">
                 {/* Card Title */}
                 <button onClick={() => setTitleModal(true)}>
@@ -105,6 +112,9 @@ const Cards = () => {
                 dangerouslySetInnerHTML={{ __html: marked(markdown) }}
               ></div> */}
           </div>
+          <button onClick={() => setIsOpen(true)}>Open Menu</button>
+
+          <OffCanvas isOpen={isOpen} setIsOpen={setIsOpen}/>
 
           {/* Modal */}
           <Modal
@@ -144,26 +154,12 @@ const Cards = () => {
             <Code language="html" code={markdown} />
           </div>
         </section>
+        
         <section>
-          <div class="relative bottom-0 right-0 bg-blue-300 h-32 w-32 mx-auto shadow-red-400 shadow-lg flex justify-center items-center">
-            <p>P</p>
-            <div class="absolute h-14 w-14 -left-4 -top-4 backdrop-blur-sm transition ease-in-out hover:-translate-x-6 transform-gpu hover:scale-125 duration-300 bg-slate-600/30 shadow-red-400 shadow-lg rounded-full flex justify-center items-center">
-              <p>C</p>
-            </div>
-          </div>
-        </section>
-        <section>
-        <div class="w-3/4 ...">
-  <div class="whitespace-break-spaces ...">Hey everyone!
-
-It's almost 2022         and                 we 
-still don't know if there       is aliens living among us, or do we? Maybe the person writing this is an alien.
-
-You will never know.</div>
-</div>
+        
         </section>
       </article>
-      <aside className="w-[600px] h-full bg-black text-white border-green-600 border-8">
+      <aside className="col-span-1 h-full bg-black text-white border-green-600 border-8">
         <h2 className="text-center text-sm my-2">Properties</h2>
         <hr />
         <h3 className={`${propertiesTopic}`}>Card top</h3>
